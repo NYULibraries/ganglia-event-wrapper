@@ -2,7 +2,7 @@
 # Script can take one argument, which is the name of the summary text assigned
 #  in ganglia
 # Created by: rdf6
-# Modified: 2013-03-26 @ bs122
+# Modified: 2013-04-04 @ bs122
 
 # Get passed arguments and set default if not passed
 $summary_text=$args[0]

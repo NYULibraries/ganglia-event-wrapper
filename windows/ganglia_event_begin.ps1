@@ -2,7 +2,7 @@
 # Script can take one argument, which is the name of the summary text assigned
 #  in ganglia
 # Created by: rdf6
-# Modified: 2013-03-26 @ bs122
+# Modified: 2013-04-04 @ bs122
 
 # Get passed arguments and set default if not passed
 $summary_text=$args[0]
@@ -27,11 +27,11 @@ if (Test-Path -path $temp_dir\$temp_file)
 	Remove-Item $temp_dir\$temp_file
 }
 
-#Get server name
+# Get server name
 $server_name = hostname
 
-#Convert server name to lowercase (required by Ganglia)
+# Convert server name to lowercase (required by Ganglia)
 $server_name = $server_name.toLower()
 
-#Add backup event start time to Ganglia
+# Add backup event start time to Ganglia
 (new-object net.webclient).DownloadString("http://ganglia.library.nyu.edu/api/events.php?action=add&start_time=now&summary=$summary_text&host_regex=$server_name") > $temp_dir\$temp_file

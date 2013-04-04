@@ -1,7 +1,7 @@
 #!/bin/bash
-# Adds an event to Ganglia when ArcServe backup agent executes a backup job
+# Ends an event to Ganglia when a generic job finishes
 # Created by: bs122
-# Modified: 2013-04-03
+# Modified: 2013-04-04
 
 # Get passed arguments and set default if not passed
 summary_text=$1
