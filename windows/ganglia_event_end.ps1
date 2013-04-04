@@ -1,8 +1,23 @@
-# Adds an event to Ganglia when a generic job ends
-# Script can take one argument, which is the name of the summary text assigned
-#  in ganglia
-# Created by: rdf6
-# Modified: 2013-04-04 @ bs122
+################################################################################
+# ganglia_event_end.ps1                                                        #
+# Ends an event to Ganglia when a generic job completes                        #
+# Readme can be found at https://github.com/bswinnerton/ganglia-event-wrapper  #
+# Created by: rdf6 @ New York University                                       #
+# Modified: 2013-04-04 @ bs122                                                 #
+################################################################################
+
+### Change variables below as needed
+
+# Ganglia host (the only thing you should need to change)
+$ganglia_host = "ganglia.library.nyu.edu"
+
+# Temporary folder path to store ganglia event id
+$temp_dir = $env:temp
+
+### End variable assignment
+
+
+
 
 # Get passed arguments and set default if not passed
 $summary_text=$args[0]
@@ -14,16 +29,13 @@ if ($summary_text -eq $null)
 # Clean up passed parameters for safe URL and file
 $temp_name = $summary_text.Replace(" ", "_")
 
-# Get user temp directory
-$temp_dir = $env:temp
-
 # Define temp filename
 $temp_file = "ganglia_${temp_name}_begin.txt"
 
 # Grab data from temp file and set as variable
 $data = Get-Content $temp_dir\$temp_file
 
-# Check if temp file exists, if not assume event was never added and do nothing
+# Execute API call if all looks good (or don't if the temp file doesn't exist)
 if (Test-Path -path $temp_dir\$temp_file)
 {
 	# Use regex to grab the status code
